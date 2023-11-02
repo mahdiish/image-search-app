@@ -7,7 +7,7 @@ export default function Images() {
     renderedImages = images.map((image) => {
       return (
         <img
-          src={image.urls.full}
+          src={image.urls.regular}
           alt={image.alt_description}
           key={image.id}
           className="flex mb-4 rounded-md"
@@ -16,7 +16,7 @@ export default function Images() {
     });
   }
   return (
-    <div className="columns-1 sm:columns-2 md:columns-3 w-10/12 sm:w-8/12 md:w-7/12 mt-4 mb-5 rounded">
+    <div className="columns-1 sm:columns-2 md:columns-3 w-10/12 sm:w-8/12 md:w-7/12 mt-4 mb-6 rounded">
       {renderedImages}
     </div>
   );

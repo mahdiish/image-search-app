@@ -2,10 +2,11 @@ import { ImSearch } from "react-icons/im";
 import { ProjectContext } from "../ProjectContext";
 import { useContext } from "react";
 export default function Form() {
-  const { searchTerm, setSearchTerm, setImages } = useContext(ProjectContext);
+  const { searchTerm, setSearchTerm, setImages, setResultText } =
+    useContext(ProjectContext);
   function imagesRequest() {
     fetch(
-      `https://api.unsplash.com/search/photos?page=1&query=${searchTerm}&client_id=S7d9Fku-XEISKy8px20TQ9y8pPbzdkdaoggOtrkmglk`
+      `https://api.unsplash.com/search/photos?page=1&query=${searchTerm}&per_page=15&client_id=S7d9Fku-XEISKy8px20TQ9y8pPbzdkdaoggOtrkmglk`
     )
       .then(function (response) {
         if (response.ok === false) {
@@ -15,6 +16,11 @@ export default function Form() {
       })
       .then(function (data) {
         setImages(data.results);
+        setResultText(
+          <h1 className="w-10/12 sm:w-8/12 md:w-7/12 text-purple-500">
+            Results for <span className="text-white">{searchTerm}</span>
+          </h1>
+        );
       })
       .catch(function (err) {
         window.alert(`${err}`);
@@ -33,6 +39,7 @@ export default function Form() {
         onKeyDown={(event) => {
           if (event.target.value !== "" && event.key === "Enter") {
             imagesRequest();
+            event.target.blur();
           }
         }}
         placeholder="Search something..."
