@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        MontserratAlternates: ["Montserrat Alternates"],
+        Acme: ["Acme"],
       },
     },
   },
